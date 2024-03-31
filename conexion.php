@@ -8,7 +8,5 @@
 
     if(!$conection){
         echo "Error en la conexión";
-    }else{
-        echo "Conexión exitosa";
     }
 ?>
