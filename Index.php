@@ -10,7 +10,7 @@
     <section id="container">
         <form action="" method="post">
             <h3>Iniciar Sesión</h3>
-            <img src="img/logi.png" alt="Login">
+            <img src="img/login.png" alt="Login">
             <input type="text" name="usuario" placeholder="Usuario">
             <input type="password" name="clave" placeholder="Contraseña">
             <p class="alert">Mensaje</p>
