@@ -11,7 +11,7 @@
 			
 			<h1>Sistema Facturación</h1>
 			<div class="optionsBar">
-				<p>Guatemala, 20 noviembre de 2017</p>
+				<p>Panamá, <?php echo fechaC(); ?></p>
 				<span>|</span>
 				<span class="user">Julio Estrada</span>
 				<img class="photouser" src="img/user.png" alt="Usuario">
