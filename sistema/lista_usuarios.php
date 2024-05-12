@@ -1,3 +1,9 @@
+<?php
+
+    include "../conexion.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,47 +27,30 @@
                 <th>Rol</th>
                 <th>Acciones</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>Jorge</td>
-                <td>jorge@gmail.com</td>
-                <td>Administrador</td>
-                <td>
-                    <a href="#" class="link_edit">Editar</a>
-                    |
-                    <a href="#" class="link_delete">Eliminar</a>
-                </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Jorge</td>
-                <td>jorge@gmail.com</td>
-                <td>Administrador</td>
-                <td>
-                    <a href="#" class="link_edit">Editar</a>
-                    <a href="#" class="link_delete">Eliminar</a>
-                </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Jorge</td>
-                <td>jorge@gmail.com</td>
-                <td>Administrador</td>
-                <td>
-                    <a href="#" class="link_edit">Editar</a>
-                    <a href="#" class="link_delete">Eliminar</a>
-                </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Jorge</td>
-                <td>jorge@gmail.com</td>
-                <td>Administrador</td>
-                <td>
-                    <a href="#" class="link_edit">Editar</a>
-                    <a href="#" class="link_delete">Eliminar</a>
-                </td>
-            </tr>  
+            <?php
+                $query = mysqli_query($conection, "SELECT u.idusuario, u.nombre, u.correo, u.usuario, r.rol FROM
+                usuario u INNER JOIN rol r ON u.rol = r.idrol");
+
+                $result = mysqli_num_rows($query);
+                if ($result > 0) {
+                    while ($data = mysqli_fetch_array($query)){
+
+            ?>
+                <tr>
+                    <td><?php echo $data["idusuario"]; ?></td>
+                    <td><?php echo $data["nombre"]; ?></td>
+                    <td><?php echo $data["correo"]; ?></td>
+                    <td><?php echo $data["rol"]; ?></td>
+                    <td>
+                        <a href="#" class="link_edit">Editar</a>
+                        |
+                        <a href="#" class="link_delete">Eliminar</a>
+                    </td>
+                </tr>
+            <?php
+                    }
+                }
+            ?>
         </table>
 
 	</section>
