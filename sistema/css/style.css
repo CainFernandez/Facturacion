@@ -199,6 +199,10 @@ input, select{
 	border: 1px solid #85929e;
 	border-radius: 5px;
 }
+
+.notItemOne option:first-child{
+	display: none;
+}
 .btn_save{
 	font-size: 12pt;
 	background: #12a4c6;
