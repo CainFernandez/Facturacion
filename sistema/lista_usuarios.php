@@ -44,7 +44,7 @@
                     <td><?php echo $data["usuario"]; ?></td>
                     <td><?php echo $data["rol"]; ?></td>
                     <td>
-                        <a href="#" class="link_edit">Editar</a>
+                        <a href="editar_usuario.php?id=<?php echo $data["idusuario"];?>" class="link_edit">Editar</a>
                         |
                         <a href="#" class="link_delete">Eliminar</a>
                     </td>
