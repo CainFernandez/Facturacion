@@ -45,8 +45,11 @@
                     <td><?php echo $data["rol"]; ?></td>
                     <td>
                         <a class="link_edit" href="editar_usuario.php?id=<?php echo $data["idusuario"];?>">Editar</a>
-                        |
-                        <a class="link_delete" href="eliminar_confirmar_usuario.php?id=<?php echo $data["idusuario"];?>">Eliminar</a>
+                        
+                        <?php if($data["idusuario"] != 1){ ?>
+                            |
+                            <a class="link_delete" href="eliminar_confirmar_usuario.php?id=<?php echo $data["idusuario"];?>">Eliminar</a>
+                        <?php } ?>
                     </td>
                 </tr>
             <?php
