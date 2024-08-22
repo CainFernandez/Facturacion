@@ -15,7 +15,7 @@
 		}
 	}
 
-    if(empty($_REQUEST['id'])) 
+    if(empty($_REQUEST['id']) || ($_REQUEST['id']) == 1 ) 
 	{
 		header("location: lista_usuarios.php");
 	} else {
