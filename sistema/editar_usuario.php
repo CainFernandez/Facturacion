@@ -48,12 +48,14 @@
             }
         
         }
+        mysqli_close($conection);
     }
 
     //---------- GET ------------.
     if(empty($_GET['id']))
     {
         header('Location: lista_usuarios.php');
+        mysqli_close($conection);
     }
     $iduser = $_GET['id'];
 
@@ -63,6 +65,7 @@
                                       ON  u.rol = r.idrol
                                       WHERE idusuario = $iduser");
     
+    mysqli_close($conection);
     $result_sql = mysqli_num_rows($sql);
 
     if($result_sql == 0){
@@ -119,8 +122,10 @@
                 <label for="clave">Clave</label>
                 <input type="password" name="clave" id="clave" placeholder="Clave de acceso">
                 <label for="rol">Tipo Usuario</label>
-                <?php 
+                <?php
+                    include "../conexion.php"; 
                     $query_rol = mysqli_query($conection, "SELECT * FROM rol");
+                    mysqli_close($conection);
                     $result_rol = mysqli_num_rows($query_rol);
                 ?>
                 <select name="rol" id="rol" class="notItemOne">

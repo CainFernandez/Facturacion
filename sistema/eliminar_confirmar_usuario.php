@@ -5,6 +5,7 @@
 	{
 		if($_POST['idusuario'] == 1 ){
 			header("location: lista_usuarios.php");
+			mysqli_close($conection);
 			exit;
 		}
 
@@ -13,6 +14,8 @@
 		//$query_delete = mysqli_query($conection,"DELETE FROM usuario WHERE idusuario = $idusuario");
 		$query_delete = mysqli_query($conection, "UPDATE usuario SET estatus = 0 WHERE idusuario = $idusuario");
 
+		mysqli_close($conection);
+
 		if($query_delete){
 			header("location: lista_usuarios.php");
 		}else{
@@ -20,9 +23,11 @@
 		}
 	}
 
+
     if(empty($_REQUEST['id']) || ($_REQUEST['id']) == 1 ) 
 	{
 		header("location: lista_usuarios.php");
+		mysqli_close($conection);
 	} else {
 
 		$idusuario = $_REQUEST['id'];
@@ -33,7 +38,7 @@
 												rol r 
 												ON u.rol = r.idrol 
 												WHERE u.idusuario = $idusuario");
-					
+		mysqli_close($conection);		
 		$result = mysqli_num_rows($query);
 
 		if ($result > 0 ) {
