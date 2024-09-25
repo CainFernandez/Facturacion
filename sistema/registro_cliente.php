@@ -18,7 +18,7 @@
             $usuario_id = $_SESSION['idUser'];
 
             $result = 0;
-            if(is_numeric($nit)){
+            if(is_numeric($nit) && $nit != 0){
                 $query = mysqli_query($conection,"SELECT * FROM cliente WHERE nit = '$nit'");
                 $result = mysqli_fetch_array($query);
             }
