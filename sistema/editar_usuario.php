@@ -54,7 +54,6 @@
             }
         
         }
-        mysqli_close($conection);
     }
 
     //---------- GET ------------.
