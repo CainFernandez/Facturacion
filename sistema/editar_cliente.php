@@ -1,59 +1,60 @@
 <?php 
 
     session_start();
-    if ($_SESSION['rol'] != 1) 
-    {
-        header("location: ./");
-    }
-    
     include "../conexion.php";
 
     //--------- POST ------------.
     if(!empty($_POST))
     {
         $alert='';
-        if (empty($_POST['nombre']) || empty($_POST['correo']) || empty($_POST['usuario']) || empty($_POST['rol'])) 
+        if (empty($_POST['nombre']) || empty($_POST['telefono']) || empty($_POST['direccion'])) 
         {
             $alert='<p class="msg_error">Todo los campos son obligatorios.</p>';
         }else{
 
-            $idUsuario = $_POST['id'];
-            $nombre = $_POST['nombre'];
-            $email = $_POST['correo'];
-            $user = $_POST['usuario'];
-            $clave = md5($_POST['clave']);
-            $rol = $_POST['rol'];
-
-                                                       
-            $query = mysqli_query($conection,"SELECT * FROM usuario 
-                                                        WHERE (usuario = '$user' AND idUsuario != $idUsuario)
-                                                        OR (correo = '$email' AND idUsuario != $idUsuario)");
-            $result = mysqli_fetch_array($query);
+            $idcliente = $_POST['id'];
+            $nit       = $_POST['nit'];
+            $nombre    = $_POST['nombre'];
+            $telefono  = $_POST['telefono'];
+            $direccion = $_POST['direccion'];
             
+            $result = 0;
+            //Condicion para NIT
+            if(is_numeric($nit) && $nit != 0)
+            {
+                $query = mysqli_query($conection,"SELECT * FROM cliente
+                                                    WHERE (nit = '$nit' AND idcliente != $idcliente)
+                                                    ");
+                
+                $result = mysqli_fetch_array($query);
+            }
+            
+            //Condicion para validar el formulario.
             if ($result > 0) {
-                $alert = '<p class="msg_error">El correo o el usuario ya existe.</p>';
+                $alert = '<p class="msg_error">El nit ya existe, ingrese otro.</p>';
             } else {
 
-                if (empty($_POST['clave']))
+                //Validar a nit a 0.
+                if($nit == '')
                 {
-                    $sql_update = mysqli_query($conection, "UPDATE usuario
-                                                            SET    nombre = '$nombre', correo = '$email', usuario ='$user', rol='$rol'
-                                                            WHERE idusuario= $idUsuario");
-                } else {
-                    $sql_update = mysqli_query($conection, "UPDATE usuario
-                                                            SET    nombre = '$nombre', correo = '$email', usuario ='$user',clave='$clave', rol='$rol'
-                                                            WHERE idusuario= $idUsuario");                        
+                    $nit = 0;
                 }
+
+                //Sql para actualizar datos.
+                $sql_update = mysqli_query($conection, "UPDATE cliente
+                                                        SET nit = $nit, nombre = '$nombre', telefono = '$telefono'
+                                                            , direccion = '$direccion'
+                                                        WHERE idcliente = $idcliente ");
             
                 if ($sql_update) {
-                    $alert = '<p class="msg_save">Usuario actualizado correctamente.</p>';
+                    $alert = '<p class="msg_save">Cliente actualizado correctamente.</p>';
                 } else {
-                    $alert = '<p class="msg_error">Error al actualizar el usuario.</p>';
+                    $alert = '<p class="msg_error">Error al actualizar el cliente.</p>';
                 }
             
             }
         
-        }
+        } 
     }
 
     //---------- GET ------------//
