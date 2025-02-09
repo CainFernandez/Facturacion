@@ -104,14 +104,15 @@
             <div class="alert"><?php echo isset($alert) ? $alert : ''; ?></div>
 
             <form action="" method="post">
+                <input type="hidden" name="id" value="<?php echo $idcliente ?>">
                 <label for="nit">NIT</label>
-                <input type="number" name="nit" id="nit" placeholder="Número de NIT">
+                <input type="number" name="nit" id="nit" placeholder="Número de NIT" value="<?php echo $nit ?>">
                 <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" id="nombre" placeholder="Nombre completo">
+                <input type="text" name="nombre" id="nombre" placeholder="Nombre completo" value="<?php echo $nombre ?>">
                 <label for="telefono">Teléfono</label>
-                <input type="number" name="telefono" id="telefono" placeholder="Teléfono">
+                <input type="number" name="telefono" id="telefono" placeholder="Teléfono" value="<?php echo $telefono ?>">
                 <label for="direccion">Dirección</label>
-                <input type="text" name="direccion" id="direccion" placeholder="Dirección completa">
+                <input type="text" name="direccion" id="direccion" placeholder="Dirección completa" value="<?php echo $direccion ?>">
 
                 <input type="submit" value="Actualizar Cliente" class="btn_save">
                 
