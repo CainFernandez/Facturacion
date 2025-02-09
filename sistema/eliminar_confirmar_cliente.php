@@ -8,6 +8,26 @@
     
 	include "../conexion.php";
 
+    if(!empty($_POST))
+	{
+        if(empty($_POST['idcliente']))
+        {
+            header("location: lista_clientes.php");
+            mysqli_close($conection);
+        }
+
+		$idcliente = $_POST['idcliente'];
+
+		$query_delete = mysqli_query($conection, "UPDATE cliente SET estatus = 0 WHERE idcliente = $idcliente");
+		mysqli_close($conection);
+
+		if($query_delete){
+			header("location: lista_clientes.php");
+		}else{
+			echo "Error al eliminar";
+		}
+	}
+
 
     //Consultar a BD y mostrar datos.
     if(empty($_REQUEST['id'])) 
