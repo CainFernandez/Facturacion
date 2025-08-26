@@ -1,14 +1,14 @@
 <nav>
 			<ul>
-				<li><a href="index.php">Inicio</a></li>
+				<li><a href="index.php"><i class="fa fa-home" aria-hidden="true"></i> Inicio</a></li>
 				<?php 
 				    if ($_SESSION['rol'] == 1) {
 				?>
 				    <li class="principal">
-					    <a href="#">Usuarios</a>
+					    <a href="#"><i class="fa fa-users" aria-hidden="true"></i> Usuarios</a>
 					    <ul>
-						    <li><a href="registro_usuario.php">Nuevo Usuario</a></li>
-						    <li><a href="lista_usuarios.php">Lista de Usuarios</a></li>
+						    <li><a href="registro_usuario.php"><i class="fa fa-user-plus" aria-hidden="true"></i> Nuevo Usuario</a></li>
+						    <li><a href="lista_usuarios.php"><i class="fa fa-users" aria-hidden="true"></i> Lista de Usuarios</a></li>
 					    </ul>
 				    </li>
 				<?php } ?>
