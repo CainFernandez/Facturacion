@@ -20,12 +20,12 @@
 	
 	<section id="container">
 
-		<h1>Lista de usuarios</h1>
-        <a href="registro_usuario.php" class="btn_new">Crear usuario</a>
+		<h1><i class="fa fa-users" aria-hidden="true"></i> Lista de usuarios</h1>
+        <a href="registro_usuario.php" class="btn_new"><i class="fa fa-user-plus" aria-hidden="true"></i> Crear usuario</a>
 
         <form action="buscar_usuario.php" method="get" class="form_search">
             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
-            <input type="submit" value="Buscar" class="btn_search">
+            <button type="submit" class="btn_search"><i class="fa fa-search" aria-hidden="true"></i></button>
         </form>
 
         <table>
@@ -72,11 +72,11 @@
                     <td><?php echo $data["usuario"]; ?></td>
                     <td><?php echo $data["rol"]; ?></td>
                     <td>
-                        <a class="link_edit" href="editar_usuario.php?id=<?php echo $data["idusuario"];?>">Editar</a>
+                        <a class="link_edit" href="editar_usuario.php?id=<?php echo $data["idusuario"];?>"><i class="far fa-edit" aria-hidden="true"></i> Editar</a>
                         
                         <?php if($data["idusuario"] != 1){ ?>
                             |
-                            <a class="link_delete" href="eliminar_confirmar_usuario.php?id=<?php echo $data["idusuario"];?>">Eliminar</a>
+                            <a class="link_delete" href="eliminar_confirmar_usuario.php?id=<?php echo $data["idusuario"];?>"><i class="fa fa-trash-alt" aria-hidden="true"></i> Eliminar</a>
                         <?php } ?>
                     </td>
                 </tr>
@@ -91,8 +91,8 @@
                     if($pagina != 1)
                     { 
                 ?>
-                    <li><a href="?pagina=<?php echo 1; ?>">|<</a></li>
-                    <li><a href="?pagina=<?php echo $pagina-1; ?>"><<</a></li>
+                    <li><a href="?pagina=<?php echo 1; ?>"><i class="fa fa-step-backward" aria-hidden="true"></i></a></li>
+                    <li><a href="?pagina=<?php echo $pagina-1; ?>"><i class="fa fa-caret-left" aria-hidden="true"></i></a></li>
 
                 <?php
                     }
@@ -108,8 +108,8 @@
                     if($pagina != $total_paginas)
                     {
                 ?>
-                        <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
-                        <li><a href="?pagina=<?php echo $total_paginas; ?>">>|</a></li>
+                        <li><a href="?pagina=<?php echo $pagina + 1; ?>"><i class="fa fa-caret-right" aria-hidden="true"></i></a></li>
+                        <li><a href="?pagina=<?php echo $total_paginas; ?>"><i class="fa fa-step-forward" aria-hidden="true"></i></a></li>
                 <?php } ?>
             
             </ul>

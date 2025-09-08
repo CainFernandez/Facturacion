@@ -58,7 +58,7 @@
 	<section id="container">
 
 		<div class="form_register">
-            <h1>Registro usuario</h1>
+            <h1><i class="fa fa-user-plus" aria-hidden="true"></i> Registro usuario</h1>
             <hr>
             <div class="alert"><?php echo isset($alert) ? $alert : ''; ?></div>
 
@@ -89,8 +89,7 @@
                         }
                     ?>
                 </select>
-                <input type="submit" value="Crear usuario" class="btn_save">
-                
+                <button type="submit" class="btn_save"><i class="fa fa-save" aria-hidden="true"></i> Crear Usuario</button>
             </form>
 
         </div>

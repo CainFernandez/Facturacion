@@ -112,7 +112,7 @@
 	<section id="container">
 
 		<div class="form_register">
-            <h1>Actualizar usuario</h1>
+            <h1><i class="far fa-edit" aria-hidden="true"></i> Actualizar usuario</h1>
             <hr>
             <div class="alert"><?php echo isset($alert) ? $alert : ''; ?></div>
 
@@ -146,7 +146,7 @@
                         }
                     ?>
                 </select>
-                <input type="submit" value="Actualizar usuario" class="btn_save">
+                <button type="submit" class="btn_save"><i class="far fa-edit" aria-hidden="true"></i> Actualizar usuario</button>
                 
             </form>
 
