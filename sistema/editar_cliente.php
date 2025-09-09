@@ -100,7 +100,7 @@
 	<section id="container">
 
 		<div class="form_register">
-            <h1>Actualizar cliente</h1>
+            <h1><i class="far fa-edit" aria-hidden="true"></i> Actualizar cliente</h1>
             <hr>
             <div class="alert"><?php echo isset($alert) ? $alert : ''; ?></div>
 
@@ -115,7 +115,7 @@
                 <label for="direccion">Dirección</label>
                 <input type="text" name="direccion" id="direccion" placeholder="Dirección completa" value="<?php echo $direccion ?>">
 
-                <input type="submit" value="Actualizar Cliente" class="btn_save">
+                <button type="submit" class="btn_save"><i class="far fa-edit" aria-hidden="true"></i> Actualizar cliente</button>
                 
             </form>
 

@@ -68,14 +68,17 @@
 	
 	<section id="container">
 		<div class="data_delete">
+			<i class="fa fa-user-times fa-7x" aria-hidden="true"></i>
+			<br>
+			<br>
 			<h2>¿Está seguro de eliminar el siguiente registro?</h2>
 			<p>Nombre del cliente: <span><?php echo $nombre; ?></span></p>
 			<p>Nit: <span><?php echo $nit; ?></span></p>
 			
 			<form method="post" action="" >
                 <input type="hidden" name="idcliente" value="<?php echo $idcliente; ?>">
-				<a href="lista_clientes.php" class="btn_cancel">Cancelar</a>
-				<input type="submit" value="Eliminar" class="btn_ok">
+				<a href="lista_clientes.php" class="btn_cancel"><i class="fa fa-ban" aria-hidden="true"></i> Cancelar</a>
+				<button type="submit" class="btn_ok"><i class="fa fa-trash-alt" aria-hidden="true"></i> Eliminar</button>
 			</form>
 		</div>
 	</section>

@@ -55,7 +55,7 @@
 	<section id="container">
 
 		<div class="form_register">
-            <h1>Registro cliente</h1>
+            <h1><i class="fa fa-user-plus" aria-hidden="true"></i> Registro cliente</h1>
             <hr>
             <div class="alert"><?php echo isset($alert) ? $alert : ''; ?></div>
 
@@ -69,8 +69,7 @@
                 <label for="direccion">Dirección</label>
                 <input type="text" name="direccion" id="direccion" placeholder="Dirección completa">
 
-                <input type="submit" value="Guardar Cliente" class="btn_save">
-                
+                <button type="submit" class="btn_save"><i class="fa fa-save" aria-hidden="true"></i> Crear Cliente</button>
             </form>
 
         </div>
