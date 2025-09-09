@@ -13,31 +13,31 @@
 				    </li>
 				<?php } ?>
 				    <li class="principal">
-					    <a href="#">Clientes</a>
+					    <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Clientes</a>
 					    <ul>
-						    <li><a href="registro_cliente.php">Nuevo Cliente</a></li>
-						    <li><a href="lista_clientes.php">Lista de Clientes</a></li>
+						    <li><a href="registro_cliente.php"><i class="fa fa-user-plus" aria-hidden="true"></i> Nuevo Cliente</a></li>
+						    <li><a href="lista_clientes.php"><i class="fa fa-list-ul" aria-hidden="true"></i> Lista de Clientes</a></li>
 					    </ul>
 				    </li>
 				    <li class="principal">
-					    <a href="#">Proveedores</a>
+					    <a href="#"><i class="fa fa-building" aria-hidden="true"></i> Proveedores</a>
 					    <ul>
-						    <li><a href="#">Nuevo Proveedor</a></li>
-						    <li><a href="#">Lista de Proveedores</a></li>
+						    <li><a href="#"><i class="fa fa-plus-square" aria-hidden="true"></i> Nuevo Proveedor</a></li>
+						    <li><a href="#"><i class="fa fa-th-list" aria-hidden="true"></i> Lista de Proveedores</a></li>
 					</ul>
 				    </li>
 				    <li class="principal">
-					    <a href="#">Productos</a>
+					    <a href="#"><i class="fa fa-cubes" aria-hidden="true"></i> Productos</a>
 					    <ul>
-						    <li><a href="#">Nuevo Producto</a></li>
-						    <li><a href="#">Lista de Productos</a></li>
+						    <li><a href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Nuevo Producto</a></li>
+						    <li><a href="#"><i class="fa fa-cubes" aria-hidden="true"></i> Lista de Productos</a></li>
 					    </ul>
 				    </li>
 				    <li class="principal">
-					    <a href="#">Facturas</a>
+					    <a href="#"><i class="fa fa-calculator" aria-hidden="true"></i> Facturas</a>
 					    <ul>
-						    <li><a href="#">Nuevo Factura</a></li>
-						    <li><a href="#">Facturas</a></li>
+						    <li><a href="#"><i class="fa fa-calendar-plus" aria-hidden="true"></i> Nuevo Factura</a></li>
+						    <li><a href="#"><i class="fa fa-calculator" aria-hidden="true"></i> Facturas</a></li>
 					    </ul>
 				    </li>
 			</ul>
