@@ -26,7 +26,7 @@
 					        <a href="#"><i class="fa fa-building" aria-hidden="true"></i> Proveedores</a>
 					        <ul>
 						        <li><a href="registro_proveedor.php"><i class="fa fa-plus-square" aria-hidden="true"></i> Nuevo Proveedor</a></li>
-						        <li><a href="#"><i class="fa fa-th-list" aria-hidden="true"></i> Lista de Proveedores</a></li>
+						        <li><a href="lista_proveedor.php"><i class="fa fa-th-list" aria-hidden="true"></i> Lista de Proveedores</a></li>
 					        </ul>
 				        </li>
 					<?php } ?>
