@@ -39,7 +39,7 @@
 
 		$idproveedor = $_REQUEST['id'];
 
-		$query = mysqli_query($conection, "SELECT * FROM proveedor WHERE codproveedor = $idproveedor ");
+		$query = mysqli_query($conection, "SELECT * FROM proveedor WHERE codproveedor = $idproveedor and estatus = 1 ");
 		mysqli_close($conection);
 
 		$result = mysqli_num_rows($query);
