@@ -33,7 +33,12 @@
 				    <li class="principal">
 					    <a href="#"><i class="fa fa-cubes" aria-hidden="true"></i> Productos</a>
 					    <ul>
-						    <li><a href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Nuevo Producto</a></li>
+							<?php 
+				                if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
+					        ?>
+						        <li><a href="registro_producto.php"><i class="fa fa-plus-circle" aria-hidden="true"></i> Nuevo Producto</a></li>
+						    <?php } ?>
+
 						    <li><a href="#"><i class="fa fa-cubes" aria-hidden="true"></i> Lista de Productos</a></li>
 					    </ul>
 				    </li>
