@@ -39,7 +39,7 @@
 						        <li><a href="registro_producto.php"><i class="fa fa-plus-circle" aria-hidden="true"></i> Nuevo Producto</a></li>
 						    <?php } ?>
 
-						    <li><a href="#"><i class="fa fa-cubes" aria-hidden="true"></i> Lista de Productos</a></li>
+						    <li><a href="lista_producto.php"><i class="fa fa-cubes" aria-hidden="true"></i> Lista de Productos</a></li>
 					    </ul>
 				    </li>
 				    <li class="principal">
