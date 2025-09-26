@@ -269,9 +269,13 @@ table td{
 .link_edit{
 	color:#0ca4ce;
 }
+.link_add{
+	color:#47d20b;
+}
 .link_delete{
 	color: #f26b6b;
 }
+
 .data_delete{
 	text-align: center;
 	margin-top: 40px;
@@ -360,7 +364,7 @@ table td{
     border-radius: 5px;
 }
 
-/*============= FOTO PRODUCTOS ===============*/
+/*============= REGISTRO PRODUCTOS - FOTO ===============*/
 
 .prevPhoto {
     display: flex;
@@ -418,8 +422,12 @@ table td{
 	top: -10px;
 	z-index: 10;
 }
-#tbl_list_productos img{
-	width: 50px;
+
+/*============= LISTA PRODUCTOS ===============*/
+.img_producto img{
+	width: 60px;
+	height: auto;
+	margin: auto;
 }
 .imgProductoDelete{
 	width: 175px;
