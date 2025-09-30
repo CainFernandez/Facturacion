@@ -39,5 +39,17 @@ $(document).ready(function(){
     	$("#img").remove();
 
     });
+
+    //--------------- MODAL FORMULARIO AGREGAR PRODUCTO ---------------//
+    $('.add_product').click(function(e){
+        e.preventDefault();
+        var producto = $(this).attr('product');
+        $('.modal').fadeIn();
+    });
+    
 });
+
+function coloseModal(){
+    $('.modal').fadeOut();
+}
 
