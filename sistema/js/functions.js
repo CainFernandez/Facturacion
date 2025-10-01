@@ -44,11 +44,38 @@ $(document).ready(function(){
     $('.add_product').click(function(e){
         e.preventDefault();
         var producto = $(this).attr('product');
+        var action = 'infoProducto';
+
+        //Extraer datos con AJAX
+        $.ajax({
+            url: 'ajax.php',
+            type: 'POST',
+            async: true,
+            data: {action:action, producto:producto},
+
+            success: function(response){
+
+                //Conversion de JSON a objeto.
+                if(response != 'error'){
+                    var info = JSON.parse(response);
+
+                    $('#producto_id').val(info.codproducto);
+                    $('.nameProducto').html(info.descripcion);
+                }
+            },
+
+            error: function(error){
+                console.log(error);
+            },	
+        });
+
+        //Abrir modal
         $('.modal').fadeIn();
     });
     
 });
 
+//Cerrar modal
 function coloseModal(){
     $('.modal').fadeOut();
 }
