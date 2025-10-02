@@ -59,8 +59,20 @@ $(document).ready(function(){
                 if(response != 'error'){
                     var info = JSON.parse(response);
 
-                    $('#producto_id').val(info.codproducto);
-                    $('.nameProducto').html(info.descripcion);
+                    //$('#producto_id').val(info.codproducto);
+                    //$('.nameProducto').html(info.descripcion);
+
+                    $('.bodyModal').html('<form action="" method="post" name="form_add_product" id="form_add_product" onsubmit="event.preventDefault(); sendDataProduct();">'+
+		                                  '<h1><i class="fa fa-cubes" aria-hidden="true" style="font-size:45pt;"></i><br> Agregar Producto</h1>'+
+			                              '<h2 class="nameProducto">'+info.descripcion+'</h2><br>'+
+			                              '<input type="number" name="cantidad" id="txtCantidad" placeholder="Cantidad del Producto" required><br>'+
+			                              '<input type="text" name="precio" id="txtPrecio" placeholder="Precio del Producto" required>'+
+			                              '<input type="hidden" name="producto_id" id="producto_id" value="'+info.codproducto+'" required>'+
+			                              '<input type="hidden" name="action" value="addProduct" required>'+
+			                              '<div class="alert alertAddProduct"></div>'+
+			                              '<button type="submit" class="btn_new"><i class="fas fa-plus"></i> Agregar</button>'+
+			                              '<a href="#" class="btn_ok closeModal" onclick="coloseModal();"><i class="fas fa-ban"></i> Cerrar</a>'+
+		                                '</form>');
                 }
             },
 
@@ -86,8 +98,19 @@ function sendDataProduct() {
         async: true,
         data: $('#form_add_product').serialize(),
 
+        //Mostra cantidad,precio sin necesidad recargar la  pagina.
         success: function(response){
-            console.log(response);
+            if(response == 'error')
+            {
+                $('.alertAddProduct').html('<p style="color:red;">Error al agregar el producto.</p>');
+            }else{
+                var info = JSON.parse(response);
+                $('.row'+info.producto_id+' .celPrecio').html(info.nuevo_precio);
+                $('.row'+info.producto_id+' .celExistencia').html(info.nueva_existencia);
+                $('#txtCantidad').val('');
+                $('#txtPrecio').val('');
+                $('.alertAddProduct').html('<p>Producto guardado correctamente.</p>');
+            }
         },
 
             error: function(error){

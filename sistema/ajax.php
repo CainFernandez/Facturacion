@@ -43,8 +43,9 @@
                     $query_upd = mysqli_query($conection,"CALL actualizar_precio_producto($cantidad,$precio,$producto_id)");
                     $result_pro = mysqli_num_rows($query_upd);
                     if($result_pro > 0){
-
                         $data = mysqli_fetch_assoc($query_upd);
+
+                        $data['producto_id'] = $producto_id;
                         echo json_encode($data,JSON_UNESCAPED_UNICODE);
                         exit;
                     }
