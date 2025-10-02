@@ -75,8 +75,34 @@ $(document).ready(function(){
     
 });
 
+//Agregar producto a entradas con ajax
+function sendDataProduct() {
+    
+    $('.alertAddProduct').html('');
+
+    $.ajax({
+        url: 'ajax.php',
+        type: 'POST',
+        async: true,
+        data: $('#form_add_product').serialize(),
+
+        success: function(response){
+            console.log(response);
+        },
+
+            error: function(error){
+            console.log(error);
+        },	
+    });
+
+}
+
 //Cerrar modal
 function coloseModal(){
+
+    $('#txtCantidad').val('');
+    $('#txtPrecio').val('');
+    $('.alertAddProduct').html('');
     $('.modal').fadeOut();
 }
 

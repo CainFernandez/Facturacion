@@ -40,7 +40,7 @@
                 $result_register = mysqli_fetch_array($sql_registe);
                 $total_registro = $result_register['total_registro'];
 
-                $por_pagina = 3;
+                $por_pagina = 5;
 
                 if(empty($_GET['pagina']))
                 {
