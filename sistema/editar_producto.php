@@ -12,17 +12,18 @@
     if (!empty($_POST)) {
         
         $alert='';
-        if (empty($_POST['proveedor']) || empty($_POST['producto'])  || empty($_POST['precio']) || $_POST['precio'] <= 0 
-        || empty($_POST['cantidad']) || $_POST['cantidad'] <= 0) 
+        if (empty($_POST['proveedor']) || empty($_POST['producto'])  || empty($_POST['precio']) || empty($_POST['id']) 
+            || empty($_POST['foto_actual']) || empty($_POST['foto_remove'])) 
         {
             $alert='<p class="msg_error">Todo los campos son obligatorios.</p>';
         }else{
 
-            $proveedor  = $_POST['proveedor'];
-            $producto   = $_POST['producto'];
-            $precio     = $_POST['precio'];
-            $cantidad   = $_POST['cantidad']; 
-            $usuario_id = $_SESSION['idUser'];
+            $codproducto = $_POST['id'];
+            $proveedor   = $_POST['proveedor'];
+            $producto    = $_POST['producto'];
+            $precio      = $_POST['precio'];
+            $imgProducto = $_POST['foto_actual']; 
+            $imgRemove   = $_POST['foto_remove'];
 
             //POST - FOTO
             $foto        = $_FILES['foto'];
@@ -30,7 +31,7 @@
             $type        = $foto['type'];
             $url_temp    = $foto['tmp_name'];
 
-            $imgProducto = 'img_producto.png';
+            $upd = '';
 
             if($nombre_foto != '')
             {
@@ -38,18 +39,31 @@
                 $img_nombre = 'img_'.md5(date('d-m-Y H:m:s'));
                 $imgProducto = $img_nombre.'.jpg';
                 $src         = $destino.$imgProducto;
+            }else{
+                if($_POST['foto_actual'] != $_POST['foto_remove']){
+                    $imgProducto = 'img_producto.png';
+                }
             }
 
-            $query_insert = mysqli_query($conection,"INSERT INTO producto(proveedor,descripcion,precio,existencia,usuario_id,foto)
-                                                                     VALUES('$proveedor','$producto','$precio','$cantidad','$usuario_id','$imgProducto')");
+            $query_update = mysqli_query($conection,"UPDATE producto
+                                                    SET descripcion  = '$producto',
+                                                        proveedor    = $proveedor,
+                                                        precio       = $precio,
+                                                        foto         = '$imgProducto'
+                                                    WHERE codproducto = $codproducto ");
                 
-            if ($query_insert) {
+            if ($query_update) {
+                if(($nombre_foto != '' && ($_POST['foto_actual'] != 'img_producto.png')) || ($_POST['foto_actual'] != $_POST['foto_remove']))
+                {
+                    unlink('img/uploads/'.$_POST['foto_actual']);
+                }
+
                 if($nombre_foto != ''){
                     move_uploaded_file($url_temp,$src);
                 }
-                $alert = '<p class="msg_save">Producto guardado correctamente.</p>';
+                $alert = '<p class="msg_save">Producto actualizado correctamente.</p>';
             } else {
-                $alert = '<p class="msg_error">Error al guardar el producto.</p>';
+                $alert = '<p class="msg_error">Error al actualizar el producto.</p>';
             }                                                        
             
         }
@@ -83,8 +97,6 @@
                 $classRemove = '';
                 $foto = '<img id="img" src="img/uploads/'.$data_producto['foto'].'" alt="Producto">';
             }
-
-            print_r($data_producto);
         }else{
             header("location: lista_producto.php");
         }
@@ -110,7 +122,10 @@
             <hr>
             <div class="alert"><?php echo isset($alert) ? $alert : ''; ?></div>
 
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="" method="post" enctype="multipart/form-data"> 
+                <input type="hidden" name="id" value="<?php echo $data_producto['codproducto']; ?>"> 
+                <input type="hidden" id="foto_actual" name="foto_actual" value="<?php echo $data_producto['foto']; ?>">
+                <input type="hidden" id="foto_remove" name="foto_remove" value="<?php echo $data_producto['foto']; ?>">
 
                 <label for="proveedor">Proveedor</label>
 

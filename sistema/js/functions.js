@@ -33,10 +33,16 @@ $(document).ready(function(){
               }              
     });
 
+    //REMOVER LA FOTO.
     $('.delPhoto').click(function(){
     	$('#foto').val('');
     	$(".delPhoto").addClass('notBlock');
     	$("#img").remove();
+
+        //Remover foto para editar producto.
+        if($("#foto_actual") && $("#foto_remove")){
+            $("#foto_remove").val('img_producto.png');
+        }
 
     });
 
