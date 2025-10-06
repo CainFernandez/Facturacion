@@ -1,6 +1,7 @@
 <?php
     include "../conexion.php";
     session_start();
+
     //print_r($_POST);exit;
 
     if(!empty($_POST)){
@@ -58,6 +59,28 @@
             }
             exit;
         }
+
+        //ELIMINAR PRODUCTO
+         if($_POST['action'] == 'delProduct')
+        {
+            if(empty($_POST['producto_id']) || !is_numeric($_POST['producto_id'])){
+                echo 'Error';
+            }else{
+
+                $idproducto = $_POST['producto_id'];
+		        $query_delete = mysqli_query($conection, "UPDATE producto SET estatus = 0 WHERE codproducto = $idproducto");
+		        mysqli_close($conection);
+
+		        if($query_delete){
+                    echo 'OK';
+                }else{
+			        echo 'Error';
+                }
+            }
+            echo 'Error';
+        }
+        exit;
+
     }
 
     exit;

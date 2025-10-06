@@ -84,7 +84,7 @@
                                 |
                                 <a class="link_edit" href="editar_producto.php?id=<?php echo $data["codproducto"]; ?>"><i class="far fa-edit" aria-hidden="true"></i> Editar</a>
                                 |
-                                <a class="link_delete" href="eliminar_confirmar_producto.php?id=<?php echo $data["codproducto"];?>"><i class="fa fa-trash-alt" aria-hidden="true"></i> Eliminar</a> 
+                                <a class="link_delete del_product" href="#" product="<?php echo $data["codproducto"]; ?>"><i class="fa fa-trash-alt" aria-hidden="true"></i> Eliminar</a> 
                             </td>
                             <?php } ?>
 

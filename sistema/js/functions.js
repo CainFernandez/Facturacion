@@ -90,6 +90,52 @@ $(document).ready(function(){
         //Abrir modal
         $('.modal').fadeIn();
     });
+
+
+     //--------------- MODAL FORMULARIO ELIMINAR PRODUCTO ---------------//
+    $('.del_product').click(function(e){
+        e.preventDefault();
+        var producto = $(this).attr('product');
+        var action = 'infoProducto';
+
+        //Extraer datos con AJAX
+        $.ajax({
+            url: 'ajax.php',
+            type: 'POST',
+            async: true,
+            data: {action:action, producto:producto},
+
+            success: function(response){
+
+                //Conversion de JSON a objeto.
+                if(response != 'error'){
+                    var info = JSON.parse(response);
+
+                    //$('#producto_id').val(info.codproducto);
+                    //$('.nameProducto').html(info.descripcion);
+
+                    $('.bodyModal').html('<form action="" method="post" name="form_del_product" id="form_del_product" onsubmit="event.preventDefault(); delProduct();">'+
+		                                  '<h1><i class="fa fa-cubes" aria-hidden="true" style="font-size:45pt;"></i><br> Eliminar Producto</h1>'+
+			                              '<p>¿Està seguro de eliminar el siguiente registro?</p>'+
+                                          '<h2 class="nameProducto">'+info.descripcion+'</h2><br>'+
+			                              '<input type="hidden" name="producto_id" id="producto_id" value="'+info.codproducto+'" required>'+
+			                              '<input type="hidden" name="action" value="delProduct" required>'+
+			                              '<div class="alert alertAddProduct"></div>'+
+                                          '<a href="#" class="btn_cancel"  onclick="coloseModal();"><i class="fa fa-ban" aria-hidden="true"></i> Cerrar</a>'+
+				                          '<button type="submit" class="btn_ok"><i class="fa fa-trash-alt" aria-hidden="true"></i> Eliminar</button>'+
+		                                '</form>');
+                }
+            },
+
+            error: function(error){
+                console.log(error);
+            },	
+        });
+
+        //Abrir modal
+        $('.modal').fadeIn();
+    });
+    
     
 });
 
@@ -116,6 +162,40 @@ function sendDataProduct() {
                 $('#txtCantidad').val('');
                 $('#txtPrecio').val('');
                 $('.alertAddProduct').html('<p>Producto guardado correctamente.</p>');
+            }
+        },
+
+            error: function(error){
+            console.log(error);
+        },	
+    });
+
+}
+
+
+//FUNCION ELIMINAR PRODUCTO
+function delProduct() {
+    
+    var pr = $('#producto_id').val();
+    $('.alertAddProduct').html('');
+
+    $.ajax({
+        url: 'ajax.php',
+        type: 'POST',
+        async: true,
+        data: $('#form_del_product').serialize(),
+
+        success: function(response){
+            console.log(response);
+
+            if(response == 'error')
+            {
+                $('.alertAddProduct').html('<p style="color:red;">Error al agregar el producto.</p>');
+
+            }else{
+                $('.row'+pr).remove();
+                $('#form_del_product .btn_ok').remove();
+                $('.alertAddProduct').html('<p>Producto eliminado correctamente.</p>');
             }
         },
 
