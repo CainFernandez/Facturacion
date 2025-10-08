@@ -25,19 +25,21 @@
 
             if(!empty($_REQUEST['busqueda'])){
                 $busqueda = strtolower($_REQUEST['busqueda']);
-                $where = "(codproducto LIKE '%$busqueda%' OR descripcion LIKE '%$busqueda%') AND estatus = 1";
+                $where = "(p.codproducto LIKE '%$busqueda%' OR p.descripcion LIKE '%$busqueda%') AND p.estatus = 1";
+                $buscar = 'busqueda='.$busqueda;
             }
 
             if(!empty($_REQUEST['proveedor'])){
                 $search_proveedor = $_REQUEST['proveedor'];
-                $where = "proveedor LIKE $search_proveedor AND estatus = 1";
+                $where = "p.proveedor LIKE $search_proveedor AND p.estatus = 1";
+                $buscar = 'proveedor='.$search_proveedor;
             }
         ?>
 		<h1><i class="fa fa-cubes" aria-hidden="true"></i> Lista de Productos</h1>
         <a href="registro_producto.php" class="btn_new"><i class="fa fa-plus-circle" aria-hidden="true"></i> Crear producto</a>
 
         <form action="buscar_productos.php" method="get" class="form_search">
-            <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
+            <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" value="<?php echo $busqueda; ?>">
             <button type="submit" class="btn_search"><i class="fa fa-search" aria-hidden="true"></i></button>
         </form>
 
@@ -57,6 +59,7 @@
                         $result_proveedor = mysqli_num_rows($query_proveedor);
                     ?>
                     <select name="proveedor" id="search_proveedor">
+                        <option value="" selected>PROVEEDOR</option>
                     <?php
 
                         if($result_proveedor > 0){
@@ -82,14 +85,11 @@
             </tr>
             <?php
                 //PAGINADOR
-                $sql_registe = mysqli_query($conection, "SELECT COUNT(*) as total_registro FROM producto
+                $sql_registe = mysqli_query($conection, "SELECT COUNT(*) as total_registro FROM producto AS p
                                                                                             WHERE $where");
 
                 $result_register = mysqli_fetch_array($sql_registe);
                 $total_registro = $result_register['total_registro'];
-
-                echo $total_registro;
-                exit;
 
                 $por_pagina = 5;
 
@@ -107,7 +107,8 @@
                                                    FROM producto p
                                                    INNER JOIN proveedor pr
                                                    ON p.proveedor = pr.codproveedor
-                                                   WHERE p.estatus = 1 ORDER BY p.codproducto DESC LIMIT $desde,$por_pagina");
+                                                   WHERE $where 
+                                                   ORDER BY p.codproducto DESC LIMIT $desde,$por_pagina");
 
                 mysqli_close($conection);
 
@@ -145,14 +146,18 @@
                 }
             ?>
         </table>
-        <div class="paginador">
+        <?php
+                if($total_paginas != 0)
+                {
+        ?>
+                    <div class="paginador">
             <ul>
                 <?php
                     if($pagina != 1)
                     { 
                 ?>
-                    <li><a href="?pagina=<?php echo 1; ?>"><i class="fa fa-step-backward" aria-hidden="true"></i></a></li>
-                    <li><a href="?pagina=<?php echo $pagina-1; ?>"><i class="fa fa-caret-left" aria-hidden="true"></i></a></li>
+                    <li><a href="?pagina=<?php echo 1; ?>&<?php echo $buscar; ?>"><i class="fa fa-step-backward" aria-hidden="true"></i></a></li>
+                    <li><a href="?pagina=<?php echo $pagina-1; ?>&<?php echo $buscar; ?>"><i class="fa fa-caret-left" aria-hidden="true"></i></a></li>
 
                 <?php
                     }
@@ -161,19 +166,20 @@
                         if($i == $pagina) {
                             echo '<li class="pageSelected">'.$i.'</li>';
                         } else {
-                            echo '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
+                            echo '<li><a href="?pagina='.$i.'&'.$buscar.'">'.$i.'</a></li>';
                         }
                     }
 
                     if($pagina != $total_paginas)
                     {
                 ?>
-                        <li><a href="?pagina=<?php echo $pagina + 1; ?>"><i class="fa fa-caret-right" aria-hidden="true"></i></a></li>
-                        <li><a href="?pagina=<?php echo $total_paginas; ?>"><i class="fa fa-step-forward" aria-hidden="true"></i></a></li>
+                        <li><a href="?pagina=<?php echo $pagina + 1; ?>&<?php echo $buscar; ?>"><i class="fa fa-caret-right" aria-hidden="true"></i></a></li>
+                        <li><a href="?pagina=<?php echo $total_paginas; ?>&<?php echo $buscar; ?>"><i class="fa fa-step-forward" aria-hidden="true"></i></a></li>
                 <?php } ?>
             
             </ul>
-        </div>
+                    </div>
+        <?php   } ?>
 
 	</section>
 
