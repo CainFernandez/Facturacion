@@ -135,9 +135,23 @@ $(document).ready(function(){
         //Abrir modal
         $('.modal').fadeIn();
     });
+
+    //---------------- BUSCAR PRODUCTO POR PROVEEDOR ------------------//
+    $('#search_proveedor').change(function(e){
+        e.preventDefault();
+        var sistema = getUrl();
+        location.href = sistema+'buscar_productos.php?proveedor='+$(this).val();
+    })
     
     
-});
+}); //End Ready
+
+//Funcion buscar producto.
+function getUrl(){
+    var loc = window.location;
+    var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
+    return loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
+}
 
 //Agregar producto a entradas con ajax
 function sendDataProduct() {
