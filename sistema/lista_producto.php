@@ -37,6 +37,7 @@
                         $result_proveedor = mysqli_num_rows($query_proveedor);
                     ?>
                     <select name="proveedor" id="search_proveedor">
+                        <option value="" selected>PROVEEDOR</option>
                     <?php
                         if($result_proveedor > 0){
                             while($proveedor = mysqli_fetch_array($query_proveedor)){
