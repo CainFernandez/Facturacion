@@ -141,11 +141,23 @@ $(document).ready(function(){
         e.preventDefault();
         var sistema = getUrl();
         location.href = sistema+'buscar_productos.php?proveedor='+$(this).val();
-    })
+    });
+
+ //---------------- Nueva Ventas ---------------------//
+    //Activa campos para registrar cliente.
+    $('.btn_new_cliente').click(function(e){
+        e.preventDefault();
+        $('#nom_cliente').removeAttr('disabled');
+        $('#tel_cliente').removeAttr('disabled');
+        $('#dir_cliente').removeAttr('disabled');
+
+        $('#div_registro_cliente').slideDown();
+    });
     
     
 }); //End Ready
 
+//---------------------------------- FUNCIONES ----------------------------------//
 //Funcion buscar producto.
 function getUrl(){
     var loc = window.location;
@@ -220,7 +232,7 @@ function delProduct() {
 
 }
 
-//Cerrar modal
+//Funcion Cerrar modal
 function coloseModal(){
 
     $('#txtCantidad').val('');
