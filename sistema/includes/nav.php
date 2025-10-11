@@ -43,10 +43,10 @@
 					    </ul>
 				    </li>
 				    <li class="principal">
-					    <a href="#"><i class="fa fa-calculator" aria-hidden="true"></i> Facturas</a>
+					    <a href="#"><i class="fa fa-calculator" aria-hidden="true"></i> Ventas</a>
 					    <ul>
-						    <li><a href="#"><i class="fa fa-calendar-plus" aria-hidden="true"></i> Nuevo Factura</a></li>
-						    <li><a href="#"><i class="fa fa-calculator" aria-hidden="true"></i> Facturas</a></li>
+						    <li><a href="nueva_venta.php"><i class="fa fa-calendar-plus" aria-hidden="true"></i> Nuevo Venta</a></li>
+						    <li><a href="#"><i class="fa fa-calculator" aria-hidden="true"></i> Ventas</a></li>
 					    </ul>
 				    </li>
 			</ul>
