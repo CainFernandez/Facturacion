@@ -169,8 +169,6 @@ $(document).ready(function(){
 
                 success: function(response)
                 {
-                    console.log(response);
-
                     if(response == 0){
                         $('#idcliente').val('');
                         $('#nom_cliente').val('');
@@ -200,6 +198,38 @@ $(document).ready(function(){
                 },
                 error: function(error){
 
+                }
+            });
+        });
+
+        //Boton crear nuevo cliente.
+        $('#form_new_cliente_venta').submit(function(e){
+            e.preventDefault();
+
+            $.ajax({
+                url: 'ajax.php',
+                type: "POST",
+                async: true,
+                data: $('#form_new_cliente_venta').serialize(),
+
+                success: function(response)
+                {
+                   if(response != 'error'){
+                    //Agregar ID a input hidden.
+                    $('#idcliente').val(response);
+
+                    //Bloquear campos.
+                    $('#nom_cliente').attr('disabled','disabled');
+                    $('#tel_cliente').attr('disabled','disabled');
+                    $('#dir_cliente').attr('disabled','disabled');
+
+                    //Ocultar boton nuevo cliente.
+                    $('.btn_new_cliente').slideUp();
+                    //Ocultar boton Guardar.
+                    $('#div_registro_cliente').slideUp();
+                   }
+                },
+                error: function(error){
                 }
             });
         });
