@@ -143,16 +143,67 @@ $(document).ready(function(){
         location.href = sistema+'buscar_productos.php?proveedor='+$(this).val();
     });
 
- //---------------- Nueva Ventas ---------------------//
-    //Activa campos para registrar cliente.
-    $('.btn_new_cliente').click(function(e){
-        e.preventDefault();
-        $('#nom_cliente').removeAttr('disabled');
-        $('#tel_cliente').removeAttr('disabled');
-        $('#dir_cliente').removeAttr('disabled');
+    //---------------- Nueva Ventas ---------------------//
+        //Activa campos para registrar cliente.
+        $('.btn_new_cliente').click(function(e){
+            e.preventDefault();
+            $('#nom_cliente').removeAttr('disabled');
+            $('#tel_cliente').removeAttr('disabled');
+            $('#dir_cliente').removeAttr('disabled');
 
-        $('#div_registro_cliente').slideDown();
-    });
+            $('#div_registro_cliente').slideDown();
+        });
+
+        //Buscar cliente.
+        $('#nit_cliente').keyup(function(e){
+            e.preventDefault();
+
+            var cl = $(this).val();
+            var action = 'searchCliente';
+
+            $.ajax({
+                url: 'ajax.php',
+                type: "POST",
+                async: true,
+                data: {action:action,cliente:cl},
+
+                success: function(response)
+                {
+                    console.log(response);
+
+                    if(response == 0){
+                        $('#idcliente').val('');
+                        $('#nom_cliente').val('');
+                        $('#tel_cliente').val('');
+                        $('#dir_cliente').val('');
+
+                        //Mostrar boton NUEVO CLIENTE.
+                        $('.btn_new_cliente').slideDown();
+                    }else{
+                        var data = $.parseJSON(response);
+                        $('#idcliente').val(data.idcliente);
+                        $('#nom_cliente').val(data.nombre);
+                        $('#tel_cliente').val(data.telefono);
+                        $('#dir_cliente').val(data.direccion);
+
+                        //Ocultar boton NUEVO CLIENTE.
+                        $('.btn_new_cliente').slideUp();
+
+                        //Bloquea campos
+                        $('#nom_cliente').attr('disabled','disabled');
+                        $('#tel_cliente').attr('disabled','disabled');
+                        $('#dir_cliente').attr('disabled','disabled');
+
+                        //Oculta boton GUARDAR.
+                        $('#div_registro_cliente').slideUp();
+                    }
+                },
+                error: function(error){
+
+                }
+            });
+        });
+    //------------END NUEVA VENTA.
     
     
 }); //End Ready
