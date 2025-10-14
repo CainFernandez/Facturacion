@@ -52,7 +52,7 @@
             <div class="datos">
                 <div class="wd50">
                     <label>Vendedor</label>
-                    <p>Carlos Estrada Porras</p>
+                    <p><?php echo $_SESSION['nombre']; ?></p>
                 </div>
                 <div class="wd50">
                     <label>Acciones</label>
