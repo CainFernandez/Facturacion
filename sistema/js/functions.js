@@ -302,6 +302,32 @@ $(document).ready(function(){
                 $('#add_product_venta').slideDown();
             }
         });
+
+        //Agregar producto al detalle.
+        $('#add_product_venta').click(function(e){
+            e.preventDefault();
+
+            if($('#txt_cant_producto').val() > 0)
+            {
+                var codproducto = $('#txt_cod_producto').val();
+                var cantidad    = $('#txt_cant_producto').val();
+                var action      = 'addProductoDetalle';
+
+                $.ajax({
+                    url : 'ajax.php',
+                    type : "POST",
+                    async : true,
+                    data : {action:action,producto:codproducto,cantidad:cantidad},
+
+                    success: function(response)
+                    {
+                        console.log(response);
+                    },
+                    error: function(error){
+                    }
+                });
+            }
+        });
     //------------END NUEVA VENTA.
     
     
