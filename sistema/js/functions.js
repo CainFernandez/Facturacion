@@ -438,3 +438,31 @@ function coloseModal(){
     $('.modal').fadeOut();
 }
 
+//Funcion mostrar datos de detalles de ventas y totales, sin recargar la pagina - NUEVA VENTA.
+ function serchForDetalle(id){
+    var action = 'serchForDetalle';
+    var user = id;
+
+    $.ajax({
+        url : 'ajax.php',
+        type : "POST",
+        async : true,
+        data : {action:action,user:user},
+
+        success: function(response)
+        {
+            if(response != 'error')
+            {
+                var info = JSON.parse(response);
+                $('#detalle_venta').html(info.detalle);
+                $('#detalles_totales').html(info.totales);
+
+            }else{
+                console.log('no data');
+            }
+        },
+            error: function(error){
+        }
+    });
+ }
+
