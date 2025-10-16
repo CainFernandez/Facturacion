@@ -321,7 +321,28 @@ $(document).ready(function(){
 
                     success: function(response)
                     {
-                        console.log(response);
+                        if(response != 'error')
+                        {
+                            var info = JSON.parse(response);
+                            $('#detalle_venta').html(info.detalle);
+                            $('#detalles_totales').html(info.totales);
+
+                            $('#txt_cod_producto').val('');
+                            $('#txt_descripcion').html('-');
+                            $('#txt_existencia').html('-');
+                            $('#txt_cant_producto').val('0');
+                            $('#txt_precio').html('0.00');
+                            $('#txt_precio_total').html('0.00');
+
+                            //Bloquear campo cantidad.
+                            $('#txt_cant_producto').attr('disabled','disabled');
+
+                            //Ocultar boton Agregar.
+                            $('#add_product_venta').slideUp();
+
+                        }else{
+                            console.log('no data');
+                        }
                     },
                     error: function(error){
                     }
@@ -416,4 +437,32 @@ function coloseModal(){
     $('.alertAddProduct').html('');
     $('.modal').fadeOut();
 }
+
+//Funcion mostrar datos de detalles de ventas y totales, sin recargar la pagina - NUEVA VENTA.
+ function serchForDetalle(id){
+    var action = 'serchForDetalle';
+    var user = id;
+
+    $.ajax({
+        url : 'ajax.php',
+        type : "POST",
+        async : true,
+        data : {action:action,user:user},
+
+        success: function(response)
+        {
+            if(response != 'error')
+            {
+                var info = JSON.parse(response);
+                $('#detalle_venta').html(info.detalle);
+                $('#detalles_totales').html(info.totales);
+
+            }else{
+                console.log('no data');
+            }
+        },
+            error: function(error){
+        }
+    });
+ }
 

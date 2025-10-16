@@ -102,5 +102,14 @@
     </section>
 
     <?php include "includes/footer.php"; ?>
+
+    <!-- Llamar al funcion para mostrar datos sin recargar -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var usuarioid = '<?php echo $_SESSION['idUser']; ?>';
+            serchForDetalle(usuarioid);
+        });
+    </script>
+    
 </body>
 </html>
