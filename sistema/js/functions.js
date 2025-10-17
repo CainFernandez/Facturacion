@@ -303,7 +303,7 @@ $(document).ready(function(){
             }
         });
 
-        //Agregar producto al detalle.
+        //Agregar producto al detalle temp.
         $('#add_product_venta').click(function(e){
             e.preventDefault();
 
@@ -343,6 +343,8 @@ $(document).ready(function(){
                         }else{
                             console.log('no data');
                         }
+                        //Llamar a la funcion.
+                        viewProcesar();
                     },
                     error: function(error){
                     }
@@ -460,9 +462,66 @@ function coloseModal(){
             }else{
                 console.log('no data');
             }
+            //Llamar a la funcion.
+            viewProcesar();
         },
             error: function(error){
         }
     });
- }
+}
+
+//Funcion eliminar producto - NUEVA VENTA.
+ function del_product_detalle(correlativo){
+    var action = 'delProductoDetalle';
+    var id_detalle = correlativo;
+
+    $.ajax({
+        url : 'ajax.php',
+        type : "POST",
+        async : true,
+        data : {action:action,id_detalle:id_detalle},
+
+        success: function(response)
+        {
+            if(response != 'error')
+            {
+                var info = JSON.parse(response);
+                $('#detalle_venta').html(info.detalle);
+                $('#detalles_totales').html(info.totales);
+
+                $('#txt_cod_producto').val('');
+                $('#txt_descripcion').html('-');
+                $('#txt_existencia').html('-');
+                $('#txt_cant_producto').val('0');
+                $('#txt_precio').html('0.00');
+                $('#txt_precio_total').html('0.00');
+
+                //Bloquear campo cantidad.
+                $('#txt_cant_producto').attr('disabled','disabled');
+
+                //Ocultar boton Agregar.
+                $('#add_product_venta').slideUp();
+
+            }else{
+                $('#detalle_venta').html('');
+                $('#detalles_totales').html('');
+            }
+
+            //Llamar a la funcion.
+            viewProcesar();
+        },
+        error: function(error){
+        }
+    });
+}
+
+//Funcion Mostrar/ocultar boton Procesar - NUEVA VENTA.
+function viewProcesar(){
+    if($('#detalle_venta tr').length > 0)
+    {
+        $('#btn_facturar_venta').show();
+    }else{
+        $('#btn_facturar_venta').hide();
+    }
+}
 
