@@ -58,7 +58,8 @@
                     <label>Acciones</label>
                     <div id="acciones_venta">
                         <a href="#" class="btn_ok textcenter" id="btn_anular_venta"><i class="fa fa-ban" aria-hidden="true"></i> Anular</a>
-                        <a href="#" class="btn_new textcenter" id="btn_facturar_venta"><i class="far fa-edit" aria-hidden="true"></i> Procesar</a>
+                        <a href="#" class="btn_new textcenter" id="btn_facturar_venta" style="display: none;">
+                        <i class="far fa-edit" aria-hidden="true" ></i> Procesar</a>
                     </div>
                 </div>
             </div>
