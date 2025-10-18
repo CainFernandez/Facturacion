@@ -143,7 +143,7 @@ $(document).ready(function(){
         location.href = sistema+'buscar_productos.php?proveedor='+$(this).val();
     });
 
-    //---------------- Nueva Ventas ---------------------//
+    //---------------- NUEVA VENTA ---------------------//
         //Activa campos para registrar cliente.
         $('.btn_new_cliente').click(function(e){
             e.preventDefault();
@@ -351,6 +351,35 @@ $(document).ready(function(){
                 });
             }
         });
+
+        //Boton anular la venta.
+        $('#btn_anular_venta').click(function(e){
+            e.preventDefault();
+
+            var rows = $('#detalle_venta tr').length;
+            if(rows > 0)
+            {
+                var action = 'anularVenta';
+
+                $.ajax({
+                    url : 'ajax.php',
+                    type : "POST",
+                    async : true,
+                    data : {action:action},
+
+                    success: function(response)
+                    {
+                        if(response != 'error')
+                        {
+                            location.reload();
+                        }
+                    },
+                    error: function(error){
+                    }
+                });
+            }
+        });
+
     //------------END NUEVA VENTA.
     
     
