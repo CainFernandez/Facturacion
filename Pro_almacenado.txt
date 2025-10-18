@@ -1,4 +1,4 @@
-/-- Eliminar producto del detalle temporal --/
+/=== Eliminar producto del detalle temporal ===/
 DELIMITER $$
    CREATE PROCEDURE del_detalle_temp(id_detalle int, token varchar(50))
    BEGIN
@@ -9,4 +9,58 @@ DELIMITER $$
        ON tmp.codproducto = p.codproducto
        WHERE tmp.token_user = token;
      END;$$
+DELIMITER ;
+
+/=== Procesar la venta ===/
+DELIMITER $$
+       CREATE PROCEDURE procesar_venta(cod_usuario int, cod_cliente int, token varchar(50))
+       BEGIN
+           DECLARE factura INT;
+           
+           DECLARE registros INT;
+           DECLARE total decimal(10,2);
+           
+           DECLARE nueva_existencia INT;
+           DECLARE existencia_actual INT;
+           
+           DECLARE tmp_cod_producto int;
+           DECLARE tmp_cant_producto int;
+           DECLARE a int;
+           SET a = 1;
+           
+           CREATE TEMPORARY TABLE tbl_tmp_tokenuser(id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                                                    cod_prod BIGINT,
+                                                    cant_prod int);
+           SET registros = (SELECT COUNT(*) FROM detalle_temp WHERE token_user = token);
+           
+           IF registros > 0 THEN
+               INSERT INTO tbl_tmp_tokenuser(cod_prod,cant_prod) SELECT codproducto,cantidad FROM detalle_temp WHERE token_user = token;
+               
+               INSERT INTO factura(usuario,codcliente) VALUES(cod_usuario,cod_cliente);
+               SET factura = LAST_INSERT_ID();
+               
+               INSERT INTO detallefactura(nofactura,codproducto,cantidad,precio_venta) SELECT (factura) AS nofactura, codproducto,cantidad,precio_venta
+                      FROM detalle_temp WHERE token_user = token;
+                      
+               WHILE a <= registros DO
+                       SELECT cod_prod,cant_prod INTO tmp_cod_producto,tmp_cant_producto FROM tbl_tmp_tokenuser WHERE id = a;
+                       SELECT existencia INTO existencia_actual FROM producto WHERE codproducto = tmp_cod_producto;
+                       
+                       SET nueva_existencia = existencia_actual - tmp_cant_producto;
+                       UPDATE producto SET existencia = nueva_existencia WHERE codproducto = tmp_cod_producto;
+                       
+                       SET a = a+1;
+               END WHILE;
+               
+               SET total = (SELECT SUM(cantidad * precio_venta) FROM detalle_temp WHERE token_user = token);
+               UPDATE factura SET totalfactura = total WHERE nofactura = factura;
+               
+               DELETE FROM detalle_temp WHERE token_user = token;
+               TRUNCATE TABLE tbl_tmp_tokenuser;
+               SELECT * FROM factura WHERE nofactura = factura;
+               
+           ELSE
+               SELECT 0; 
+           END IF;
+       END;$$
 DELIMITER ;
