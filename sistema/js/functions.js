@@ -380,6 +380,39 @@ $(document).ready(function(){
             }
         });
 
+        //Boton Procesar la venta.
+        $('#btn_facturar_venta').click(function(e){
+            e.preventDefault();
+
+            var rows = $('#detalle_venta tr').length;
+            if(rows > 0)
+            {
+                var action = 'procesarVenta';
+                var codcliente = $('#idcliente').val();
+
+                $.ajax({
+                    url : 'ajax.php',
+                    type : "POST",
+                    async : true,
+                    data : {action:action,codcliente:codcliente},
+
+                    success: function(response)
+                    {
+                        if(response != 'error')
+                        {
+                            //var info = JSON.parse(response);
+                            //console.log(info);
+                            location.reload();
+                        }else{
+                            console.log('no data');
+                        }
+                    },
+                    error: function(error){
+                    }
+                });
+            }
+        });
+
     //------------END NUEVA VENTA.
     
     
