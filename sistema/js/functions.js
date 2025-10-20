@@ -400,9 +400,9 @@ $(document).ready(function(){
                     {
                         if(response != 'error')
                         {
-                            //var info = JSON.parse(response);
-                            //console.log(info);
-                            location.reload();
+                            var info = JSON.parse(response);
+                            console.log(info);
+                            //location.reload();
                         }else{
                             console.log('no data');
                         }
