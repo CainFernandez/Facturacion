@@ -46,7 +46,7 @@
 					    <a href="#"><i class="fa fa-calculator" aria-hidden="true"></i> Ventas</a>
 					    <ul>
 						    <li><a href="nueva_venta.php"><i class="fa fa-calendar-plus" aria-hidden="true"></i> Nuevo Venta</a></li>
-						    <li><a href="#"><i class="fa fa-calculator" aria-hidden="true"></i> Ventas</a></li>
+						    <li><a href="ventas.php"><i class="fa fa-calculator" aria-hidden="true"></i> Ventas</a></li>
 					    </ul>
 				    </li>
 			</ul>
