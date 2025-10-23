@@ -401,8 +401,10 @@ $(document).ready(function(){
                         if(response != 'error')
                         {
                             var info = JSON.parse(response);
-                            console.log(info);
-                            //location.reload();
+                            //console.log(info);
+
+                            generarPDF(info.codcliente,info.nofactura);
+                            location.reload();
                         }else{
                             console.log('no data');
                         }
@@ -587,3 +589,15 @@ function viewProcesar(){
     }
 }
 
+//Funcion para generar el PDF.
+function generarPDF(cliente,factura){
+    var ancho = 1000;
+    var alto = 800;
+
+    //Calcular posicion x,y para centrar la ventana.
+    var x = parseInt((window.screen.width/2) - (ancho / 2));
+    var y = parseInt((window.screen.height/2) - (alto / 2));
+
+    $url = 'factura/generaFactura.php?cl='+cliente+'&f='+factura;
+    window.open($url,"Factura","left="+x+",top="+y+",height="+alto+",width="+ancho+",scrollbar=si,location=no,resizable=si,menubar=no");
+}
