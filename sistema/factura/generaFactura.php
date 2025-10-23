@@ -11,7 +11,7 @@
 	}
 
 	include "../../conexion.php";
-	require_once '../pdf/vendor/autoload.php';
+	require_once '../pdf/dompdf/autoload.inc.php';
 	use Dompdf\Dompdf;
 
 	if(empty($_REQUEST['cl']) || empty($_REQUEST['f']))
