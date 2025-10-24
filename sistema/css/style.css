@@ -463,7 +463,7 @@ table td{
 	text-align:center; 
 }
 
-/*============ Ventas ============*/
+/*============ Nueva Venta ============*/
 .datos_cliente, .datos_venta, .title_page{
 	width: 100%;
 	max-width: 900px;
@@ -545,10 +545,71 @@ table td{
 }
 .btn_anular{
 	background-color: #f36a6a;
-	border: 0;
+	border: 0; 
 	border-radius: 5px;
 	cursor: pointer;
 	padding: 10px;
 	margin: 0 3px;
 	color: #FFF;
+}
+
+/*========== Buscar por fecha - Lista venta ==========*/
+.form_search_date{
+	padding: 10px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	border-radius: 10px;
+	margin: 10px auto;
+}
+.form_search_date label{
+	margin: 0 10px;
+}
+.form_search_date input{
+	width: auto;
+}
+.form_search_date .btn_view{
+	padding: 8px;
+}
+.btn_view{
+	background-color: #1faac8;
+	border: 0;
+	border-radius: 5px;
+	cursor: pointer;
+	padding: 10px;
+	margin: 0 3px;
+	color: #fff;
+}
+
+/* ---- Acciones,contenido de la tabla - Lista Venta ---------*/
+.div_acciones{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: center;
+}
+.totalfactura{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: space-between;
+}
+.pagada, .anulada{
+	color: #fff;
+	background: #60a756;
+	text-align: center;
+	border-radius: 5px;
+	padding: 4px 15px;
+}
+.anulada{
+	background: #f36a6a;
+}
+.inactive{
+	background-color: #a4a4a4;
+	color: #ccc;
+	cursor: default;
 }

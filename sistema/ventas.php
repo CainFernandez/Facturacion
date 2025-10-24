@@ -94,12 +94,30 @@
                             <td><?php echo $estado; ?></td>
                             <td class="textright totalfactura"><span>Q.</span><?php echo $data["totalfactura"]; ?></td>
                             <td>
-                                <a class="link_edit" href="editar_venta.php?id=<?php echo $data["nofactura"];?>"><i class="far fa-edit" aria-hidden="true"></i> Editar</a>
-
-                            <?php if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2){ ?>
-                                |
-                                <a class="link_delete" href="eliminar_confirmar_venta.php?id=<?php echo $data["nofactura"];?>"><i class="fa fa-trash-alt" aria-hidden="true"></i> Eliminar</a> 
-                            <?php } ?>
+                                <div class="div_acciones">
+                                    <div>
+                                        <button class="btn_view view_factura" type="button" cl="<?php echo $data["codcliente"] ?>" 
+                                        f="<?php echo $data['nofactura']; ?>"><i class="fas fa-eye"></i></button>
+                                    </div>
+                                    <?php
+                                        if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2){
+                                            if($data["estatus"] == 1)
+                                            {
+                                    ?>
+                                                <div class="div_factura">
+                                                    <button class="btn_anular anular_factura" fac="<?php echo $data["nofactura"]; ?>"><i class="fa fa-ban" aria-hidden="true"></i></button>
+                                                </div>
+                                    <?php  
+                                            }else{ 
+                                    ?>
+                                                <div class="div_factura">
+                                                    <button type="button" class="btn_anular inactive"><i class="fa fa-ban" aria-hidden="true"></i></button>
+                                                </div>
+                                    <?php   
+                                            }
+                                        } 
+                                    ?>
+                                </div>
                             </td>
                         </tr>
             <?php
