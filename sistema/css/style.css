@@ -588,7 +588,7 @@ table td{
 	display: -ms-flex;
 	display: -o-flex;
 	display: flex;
-	justify-content: center;
+	justify-content: right;
 }
 .totalfactura{
 	display: -webkit-flex;
