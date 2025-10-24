@@ -64,3 +64,51 @@ DELIMITER $$
            END IF;
        END;$$
 DELIMITER ;
+
+/=== ANULAR LA FACTURA ===/
+DELIMITER $$
+CREATE PROCEDURE anular_factura(no_factura int)
+    BEGIN
+        DECLARE existe_factura int;
+        DECLARE registros int;
+        DECLARE a int;
+             
+        DECLARE cod_producto int;
+        DECLARE cant_producto int;
+        DECLARE existencia_actual int;
+        DECLARE nueva_existencia int;
+             
+        SET existe_factura = (SELECT COUNT(*) FROM factura WHERE nofactura = no_factura AND estatus = 1);
+             
+        IF existe_factura > 0 THEN
+            CREATE TEMPORARY TABLE tbl_tmp (
+            id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            cod_prod BIGINT,
+            cant_prod int);
+                     
+            SET a = 1;
+                     
+            SET registros = (SELECT COUNT(*) FROM detallefactura WHERE nofactura = no_factura);
+                     
+            IF registros > 0 THEN
+                INSERT INTO tbl_tmp(cod_prod,cant_prod) SELECT codproducto,cantidad FROM detallefactura WHERE nofactura = no_factura;
+                         
+                 WHILE a <= registros DO
+                    SELECT cod_prod,cant_prod INTO cod_producto,cant_producto FROM tbl_tmp WHERE id = a;
+                    SELECT existencia INTO existencia_actual FROM producto WHERE codproducto = cod_producto;
+                    SET nueva_existencia = existencia_actual + cant_producto;
+                    UPDATE producto SET existencia = nueva_existencia WHERE codproducto = cod_producto;
+                             
+                    SET a = a+1; 
+                END WHILE;
+                         
+                UPDATE factura SET estatus = 2 WHERE nofactura = no_factura;
+                DROP TABLE tbl_tmp;
+                SELECT * FROM factura WHERE nofactura = no_factura;
+                         
+            END IF;
+        ELSE 
+            SELECT 0 factura;
+        END IF;
+    END;$$
+DELIMITER ;
