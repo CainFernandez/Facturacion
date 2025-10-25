@@ -418,7 +418,48 @@
                 mysqli_close($conection);
                 exit;
             }
-        //---------END NUEVA VENTA.
+        //--------- FIN NUEVA VENTA.
+
+        //--------- LISTA DE VENTAS LLAMANDO A 'BD' -----------------//
+            //Info Factura mostrar datos.
+            if($_POST['action'] == 'infoFactura'){
+                if(!empty($_POST['nofactura'])){
+
+                    $nofactura = $_POST['nofactura'];
+                    $query = mysqli_query($conection,"SELECT * FROM factura WHERE nofactura = '$nofactura' AND estatus = 1");
+                    mysqli_close($conection);
+
+                    $result = mysqli_num_rows($query);
+                    if($result > 0){
+                        $data = mysqli_fetch_assoc($query);
+                        echo json_encode($data,JSON_UNESCAPED_UNICODE);
+                        exit;
+                    }
+                }
+                echo "error";
+                exit;
+            }
+
+            //Boton Anular Factura.
+            if($_POST['action'] == 'anularFactura'){
+                if(!empty($_POST['noFactura'])){
+
+                    $noFactura = $_POST['noFactura'];
+
+                    $query_anular = mysqli_query($conection,"CALL anular_factura($noFactura)"); 
+                    mysqli_close($conection);
+                    $result = mysqli_num_rows($query_anular); 
+
+                    if($result > 0){
+                        $data = mysqli_fetch_assoc($query_anular);
+                        echo json_encode($data,JSON_UNESCAPED_UNICODE);
+                        exit;
+                    }
+                }
+                echo "error";
+                exit;
+            }
+        //--------- FIN LISTA DE VENTAS.
 
     }
     exit;
