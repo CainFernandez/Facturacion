@@ -418,7 +418,7 @@ $(document).ready(function(){
     //------------FIN NUEVA VENTA.
 
     //-------------- LISTA DE VENTAS --------------------//
-        //Modal form Anular Factura.
+        //ACCION - Modal form Anular Factura.
         $('.anular_factura').click(function(e){
             e.preventDefault();
             var nofactura = $(this).attr('fac');
@@ -464,6 +464,14 @@ $(document).ready(function(){
             $('.modal').fadeIn();
         });
 
+        //ACCION - Boton ver factura.
+        $('.view_factura').click(function(e){
+            e.preventDefault();
+            var codCliente = $(this).attr('cl');
+            var noFactura  = $(this).attr('f');
+
+            generarPDF(codCliente,noFactura);
+        });
     //-------------- FIN LISTA DE VENTAS ----------------//
     
     
