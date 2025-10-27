@@ -112,3 +112,24 @@ CREATE PROCEDURE anular_factura(no_factura int)
         END IF;
     END;$$
 DELIMITER ;
+
+//Mostrar la cantidad de registros de usuarios,clientes, proveedores,productos y ventas.
+DELIMITER $$
+    CREATE PROCEDURE dataDashboard()
+    BEGIN
+        DECLARE usuarios int;
+        DECLARE clientes int;
+        DECLARE proveedores int;
+        DECLARE productos int;
+        DECLARE ventas int;
+        
+        SELECT COUNT(*) INTO usuarios FROM usuario WHERE estatus != 10;
+        SELECT COUNT(*) INTO clientes FROM cliente WHERE estatus != 10;
+        SELECT COUNT(*) INTO proveedores FROM proveedor WHERE estatus != 10;
+        SELECT COUNT(*) INTO productos FROM producto WHERE estatus != 10;
+        SELECT COUNT(*) INTO ventas FROM factura WHERE fecha > CURDATE() AND estatus != 10;
+        
+        SELECT usuarios,clientes,proveedores,productos,ventas;
+        
+    END;$$
+DELIMITER ;

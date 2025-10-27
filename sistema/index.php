@@ -10,7 +10,18 @@ session_start();
 	<title>Sisteme Ventas</title>
 </head>
 <body>
-	<?php include "includes/header.php"; ?>
+	<?php 
+
+	    include "includes/header.php"; 
+		include "../conexion.php";
+
+		$query_dash = mysqli_query($conection,"CALL dataDashboard();");
+		$result_das = mysqli_num_rows($query_dash);
+		if($result_das > 0){
+			$data_dash = mysqli_fetch_assoc($query_dash);
+			mysqli_close($conection);
+		}
+	?>
 	
 	<section id="container">
 		<div class="divContainer">
@@ -18,39 +29,53 @@ session_start();
 				<h1 class="titlePanelControl">Panel de control</h1>
 			</div>
 			<div class="dashboard">
+				<?php
+				    if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2)
+				    {
+				?>
 				<a href="lista_usuarios.php">
 					<i class="fas fa-users"></i>
 					<p>
 						<strong>Usuarios</strong><br>
-						<span>40</span>
+						<span><?= $data_dash['usuarios'];  ?></span>
 					</p>
 				</a>
+				<?php 
+				    } 
+				?>
 				<a href="lista_clientes.php">
 					<i class="fas fa-user"></i>
 					<p>
 						<strong>Clientes</strong><br>
-						<span>10800</span>
+						<span><?= $data_dash['clientes'];  ?></span>
 					</p>
 				</a>
+				<?php
+				    if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2)
+				    {
+				?>
 				<a href="lista_proveedor.php">
 					<i class="fa fa-building" aria-hidden="true"></i>
 					<p>
 						<strong>Proveedores</strong><br>
-						<span>200</span>
+						<span><?= $data_dash['proveedores'];  ?></span>
 					</p>
 				</a>
+				<?php
+					}
+				?>
 				<a href="lista_producto.php">
 					<i class="fa fa-cubes" aria-hidden="true"></i>
 					<p>
 						<strong>Productos</strong><br>
-						<span>2000</span>
+						<span><?= $data_dash['productos'];  ?></span>
 					</p>
 				</a>
 				<a href="ventas.php">
 					<i class="fa fa-calculator" aria-hidden="true"></i>				
 					<p>
 						<strong>Ventas</strong><br>
-						<span>500</span>
+						<span><?= $data_dash['ventas'];  ?></span>
 					</p>
 				</a>
 			</div>
