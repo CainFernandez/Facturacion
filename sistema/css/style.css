@@ -613,3 +613,96 @@ table td{
 	color: #ccc;
 	cursor: default;
 }
+
+/*============ PANEL DE CONTROL ============*/
+.titlePanelControl{
+	width: 100%;
+	background: #FFF;
+	padding: 5px 15px;
+	margin-bottom: 10px;
+	font-size: 18pt !important;
+	color: #0A4661;
+}
+.divContainer{
+	margin-bottom: 20px;
+}
+.dashboard{
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+	margin: auto;
+}
+.dashboard a{
+	color:#898989;
+	width: calc(100% / 5);
+	padding: 20px;
+	background-color:#FFF;
+	font-size: 25pt;
+	text-align:center;
+}
+.dashboard p{
+	color:#3279a7;
+}
+.dashboard a span{
+	font-weight:bold;
+	font-size:14pt;
+}
+.containerPerfil{
+	display:flex;
+	justify-content:space-around;
+	align-items:flex-start;
+	flex-wrap:wrap;
+}
+.containerDataUser, .containerDataEmpresa{
+	width:500px;
+	background-color:#FFF;
+	padding:20px;
+}
+.logoUser, .logoEmpresa{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	margin: 20px auto;
+	padding: 25px;
+	background: #E9E9E9;
+}
+.logoUser img, .logoEmpresa img{
+	width: 100%;
+	height:100%;
+}
+.divDataUser{
+	padding: 10px;
+	margin: auto;
+}
+.divInfoSistema h4{
+	background: #3279a7;
+	padding: 5px 10px;
+	color: #FFF;
+	border-radius: 3px;
+	text-align: center;
+	margin-bottom: 10px;
+}
+.divDataUser > div{
+	display: flex;
+}
+.divDataUser label{
+	width: 150px;
+	margin: 0;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.divDataUser span{
+	padding: 5px;
+}
+.divInfoSistema form{
+	padding: 20px;
+}
+.divInfoSistema input{
+	margin-bottom: 10px;
+}
+.divInfoSistema button{
+	width: 100%;
+}
