@@ -15,6 +15,30 @@ session_start();
 	    include "includes/header.php"; 
 		include "../conexion.php";
 
+		//Datos empresa.
+		$nit = '';
+		$nombreEmpresa = '';
+		$razonSocial = '';
+		$telEmpresa = '';
+		$emailEmpresa = '';
+		$dirEmpresa = '';
+		$iva = '';
+
+		$query_empresa = mysqli_query($conection, "SELECT * FROM configuracion");
+		$row_empresa = mysqli_num_rows($query_empresa);
+		if($row_empresa > 0)
+		{
+			while($arrInfoEmpresa = mysqli_fetch_assoc($query_empresa)){
+				$nit = $arrInfoEmpresa['nit'];
+				$nombreEmpresa = $arrInfoEmpresa['nombre'];
+				$razonSocial = $arrInfoEmpresa['razon_social'];
+				$telEmpresa = $arrInfoEmpresa['telefono'];
+				$emailEmpresa = $arrInfoEmpresa['email'];
+				$dirEmpresa = $arrInfoEmpresa['direccion'];
+				$iva = $arrInfoEmpresa['iva'];
+			}
+		}
+
 		$query_dash = mysqli_query($conection,"CALL dataDashboard();");
 		$result_das = mysqli_num_rows($query_dash);
 		if($result_das > 0){
@@ -127,6 +151,7 @@ session_start();
 						</form>
 					</div>
 				</div>
+				<?php if($_SESSION['rol'] == 1){ ?>
 				<div class="containerDataEmpresa">
 					<div class="logoEmpresa">
 						<img src="img/logoEmpresa.png" alt="">
@@ -138,25 +163,25 @@ session_start();
 						<input type="hidden" name="action" value="updateDataEmpresa">
 
 						<div>
-							<label>Nit:</label><input type="text" name="txtNit" id="txtNit" placeholder="Nit de la empresa" value="" required>
+							<label>Nit:</label><input type="text" name="txtNit" id="txtNit" placeholder="Nit de la empresa" value="<?= $nit; ?>" required>
 						</div>
 						<div>
-							<label>Nombre:</label><input type="text" name="txtNombre" id="txtNombre" placeholder="Nombre de la empresa" value="" required>
+							<label>Nombre:</label><input type="text" name="txtNombre" id="txtNombre" placeholder="Nombre de la empresa" value="<?= $nombreEmpresa; ?>" required>
 						</div>
 						<div>
-							<label>Razon social:</label><input type="text" name="txtRSocial" id="txtRSocial" placeholder="Razon social" value="">
+							<label>Razon social:</label><input type="text" name="txtRSocial" id="txtRSocial" placeholder="Razon social" value="<?= $razonSocial; ?>">
 						</div>
 						<div>
-							<label>Telèfono:</label><input type="text" name="txtTelEmpresa" id="txtTelEmpresa" placeholder="Nùmero de telèfono" value="" required>
+							<label>Telèfono:</label><input type="text" name="txtTelEmpresa" id="txtTelEmpresa" placeholder="Nùmero de telèfono" value="<?= $telEmpresa; ?>" required>
 						</div>
 						<div>
-							<label>Correo electrònico:</label><input type="email" name="txtEmailEmpresa" id="txtEmailEmpresa" placeholder="Correo electrònico" value="" required>
+							<label>Correo electrònico:</label><input type="email" name="txtEmailEmpresa" id="txtEmailEmpresa" placeholder="Correo electrònico" value="<?= $emailEmpresa; ?>" required>
 						</div>
 						<div>
-							<label>Direcciòn:</label><input type="text" name="txtDirEmpresa" id="txtDirEmpresa" placeholder="Direcciòn de la empresa" value="" required>
+							<label>Direcciòn:</label><input type="text" name="txtDirEmpresa" id="txtDirEmpresa" placeholder="Direcciòn de la empresa" value="<?= $dirEmpresa; ?>" required>
 						</div>
 						<div>
-							<label>IVA (%):</label><input type="text" name="txtIva" id="txtIva" placeholder="Impuesto al valor agregado (IVA)" value="" required>
+							<label>IVA (%):</label><input type="text" name="txtIva" id="txtIva" placeholder="Impuesto al valor agregado (IVA)" value="<?= $iva; ?>" required>
 						</div>
 						<div class="alertFormEmpresa" style="display: none;"></div>
 						<div>
@@ -165,6 +190,7 @@ session_start();
 					</form>
 
 				</div>
+				<?php } ?>
 			</div>
 		</div>
 	</section>
