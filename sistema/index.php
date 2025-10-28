@@ -93,18 +93,18 @@ session_start();
 						<h4>Informaciòn Personal</h4>
 
 						<div>
-							<label>Nombre:</label> <span>Abel OS</span>
+							<label>Nombre:</label><span><?= $_SESSION['nombre']; ?></span>
 						</div>
 						<div>
-							<label>Correo:</label> <span>febel@gmail.com</span>
+							<label>Correo:</label><span><?= $_SESSION['email']; ?></span>
 						</div>
 
 						<h4>Datos Usuario</h4>
 						<div>
-							<label>Rol:</label> <span>Administrador</span>
+							<label>Rol:</label><span><?= $_SESSION['rol_name']; ?></span>
 						</div>
 						<div>
-							<label>Usuario:</label> <span>Admin</span>
+							<label>Usuario:</label><span><?= $_SESSION['user']; ?></span>
 						</div>
 
 						<h4>Cambiar contraseña</h4>
@@ -113,10 +113,13 @@ session_start();
 								<input type="password" name="txtPassUser" id="txtPassUser" placeholder="Contraseña actual" required>
 							</div>
 							<div>
-								<input type="password" name="txtNewPassUser" id="txtNewPassUser" placeholder="Nueva contraseña" required>
+								<input type="password" class="newPass" name="txtNewPassUser" id="txtNewPassUser" placeholder="Nueva contraseña" required>
 							</div>
 							<div>
-								<input type="password" name="txtPassConfirm" id="txtPassConfirm" placeholder="Confirmar contraseña" required>
+								<input type="password" class="newPass" name="txtPassConfirm" id="txtPassConfirm" placeholder="Confirmar contraseña" required>
+							</div>
+							<div class="alertChangePass" style="display: none;">
+
 							</div>
 							<div>
 								<button type="submit" class="btn_save btnChangePass"><i class="fas fa-key"></i> Cambiar contraseña</button>
