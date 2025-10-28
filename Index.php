@@ -16,7 +16,11 @@
                 $user = mysqli_real_escape_string($conection,$_POST['usuario']);
                 $pass = md5(mysqli_real_escape_string($conection,$_POST['clave']));
                 
-                $query = mysqli_query($conection, "SELECT * FROM usuario WHERE usuario= '$user' AND clave = '$pass'");
+                $query = mysqli_query($conection, "SELECT u.idusuario,u.nombre,u.correo,u.usuario,r.idrol,r.rol 
+                                                        FROM usuario u
+                                                        INNER JOIN rol r
+                                                        ON u.rol = r.idrol
+                                                        WHERE u.usuario= '$user' AND u.clave = '$pass'");
                 mysqli_close($conection);
                 $result = mysqli_num_rows($query);
 
@@ -29,7 +33,8 @@
                     $_SESSION['nombre'] = $data['nombre'];
                     $_SESSION['email']  = $data['correo'];
                     $_SESSION['user']   = $data['usuario'];
-                    $_SESSION['rol']    = $data['rol'];
+                    $_SESSION['rol']    = $data['idrol'];
+                    $_SESSION['rol_name']    = $data['rol'];
 
                     # Se redirecciona a la plantilla de sistema.
                     header('location: sistema/');
