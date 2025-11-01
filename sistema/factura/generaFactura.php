@@ -13,6 +13,7 @@
 	include "../../conexion.php";
 	require_once '../pdf/dompdf/autoload.inc.php';
 	use Dompdf\Dompdf;
+	use Dompdf\Options;
 
 	if(empty($_REQUEST['cl']) || empty($_REQUEST['f']))
 	{
@@ -64,6 +65,11 @@
 
 			// instantiate and use the dompdf class
 			$dompdf = new Dompdf();
+			$options = new Options();
+
+			//Mostrar estilod y imagenes.
+			$options->set('chroot', realpath(''));
+			$dompdf = new Dompdf($options);
 
 			$dompdf->loadHtml($html);
 			// (Optional) Setup the paper size and orientation
